@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,7 +33,7 @@ public class CreditSimulationController {
                     @ApiResponse(responseCode = "500", description = "Internal server error")
             }
     )
-    public ResponseEntity<CreditSimulationResponse> simulateLoan(@RequestBody CreditSimulationRequest request) {
+    public ResponseEntity<CreditSimulationResponse> simulateLoan(@RequestBody @Valid CreditSimulationRequest request) {
         CreditSimulationResponse response = simulationService.simulate(request);
         return ResponseEntity.ok(response);
     }
